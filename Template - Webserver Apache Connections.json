@@ -1,0 +1,66 @@
+{
+    "zabbix_export": {
+        "version": "5.2",
+        "date": "2020-11-30T22:21:45Z",
+        "groups": [
+            {
+                "name": "Templates/Applications"
+            }
+        ],
+        "templates": [
+            {
+                "template": "Template - Webserver Apache Connections",
+                "name": "Template - Webserver Apache Connections",
+                "groups": [
+                    {
+                        "name": "Templates/Applications"
+                    }
+                ],
+                "applications": [
+                    {
+                        "name": "Apache"
+                    }
+                ],
+                "items": [
+                    {
+                        "name": "ConnsTotal",
+                        "type": "DEPENDENT",
+                        "key": "connstotal",
+                        "delay": "0",
+                        "applications": [
+                            {
+                                "name": "Apache"
+                            }
+                        ],
+                        "preprocessing": [
+                            {
+                                "type": "REGEX",
+                                "parameters": [
+                                    "ConnsTotal: ([0-9]+)",
+                                    "\\1"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "get_apache"
+                        }
+                    },
+                    {
+                        "name": "Apache Get Status",
+                        "type": "HTTP_AGENT",
+                        "key": "get_apache",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "applications": [
+                            {
+                                "name": "Apache"
+                            }
+                        ],
+                        "timeout": "10s",
+                        "url": "http://{$ADR_APACHE}/server-status?auto"
+                    }
+                ]
+            }
+        ]
+    }
+}
