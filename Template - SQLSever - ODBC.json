@@ -1,0 +1,145 @@
+{
+    "zabbix_export": {
+        "version": "5.2",
+        "date": "2020-11-30T20:13:12Z",
+        "groups": [
+            {
+                "name": "Templates/Databases"
+            }
+        ],
+        "templates": [
+            {
+                "template": "Template - SQLServer - ODBC",
+                "name": "Template - SQLServer - ODBC",
+                "groups": [
+                    {
+                        "name": "Templates/Databases"
+                    }
+                ],
+                "applications": [
+                    {
+                        "name": "JOB - Status"
+                    },
+                    {
+                        "name": "SQLServer"
+                    }
+                ],
+                "items": [
+                    {
+                        "name": "Get - SQL Server",
+                        "type": "ODBC",
+                        "key": "db.odbc.get[get,{$DSN}]",
+                        "history": "1d",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "params": "SELECT * from JOB",
+                        "username": "{$SQL_USER}",
+                        "password": "{$SQL_PASS}",
+                        "applications": [
+                            {
+                                "name": "SQLServer"
+                            }
+                        ]
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "name": "Discovery SQLServer",
+                        "type": "ODBC",
+                        "key": "db.odbc.discovery[jobs,{$DSN}]",
+                        "delay": "10m",
+                        "params": "SELECT job from JOB",
+                        "username": "{$SQL_USER}",
+                        "password": "{$SQL_PASS}",
+                        "lifetime": "7d",
+                        "item_prototypes": [
+                            {
+                                "name": "Status JOB - {#JOB}",
+                                "type": "DEPENDENT",
+                                "key": "job[{#JOB}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "JOB - Status"
+                                    }
+                                ],
+                                "valuemap": {
+                                    "name": "SQLServer"
+                                },
+                                "preprocessing": [
+                                    {
+                                        "type": "JSONPATH",
+                                        "parameters": [
+                                            "$[?(@.job=='{#JOB}')].status.first()"
+                                        ]
+                                    }
+                                ],
+                                "master_item": {
+                                    "key": "db.odbc.get[get,{$DSN}]"
+                                },
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last(#1)}=1",
+                                        "name": "{#JOB} - Apresentou erro",
+                                        "priority": "WARNING",
+                                        "dependencies": [
+                                            {
+                                                "name": "{#JOB} - Apresentou erro",
+                                                "expression": "{Template - SQLServer - ODBC:job[{#JOB}].last(#1)}=1 and {Template - SQLServer - ODBC:job[{#JOB}].last(#2)}=1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "expression": "{last(#1)}=1 and {last(#2)}=1",
+                                        "name": "{#JOB} - Apresentou erro",
+                                        "priority": "AVERAGE",
+                                        "dependencies": [
+                                            {
+                                                "name": "{#JOB} - Apresentou erro",
+                                                "expression": "{Template - SQLServer - ODBC:job[{#JOB}].last(#1)}=1 and {Template - SQLServer - ODBC:job[{#JOB}].last(#2)}=1 and {Template - SQLServer - ODBC:job[{#JOB}].last(#3)}=1"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "expression": "{last(#1)}=1 and {last(#2)}=1 and {last(#3)}=1",
+                                        "name": "{#JOB} - Apresentou erro",
+                                        "priority": "HIGH"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "macros": [
+                    {
+                        "macro": "{$DSN}",
+                        "value": "JOB"
+                    },
+                    {
+                        "macro": "{$SQL_PASS}",
+                        "value": "projeto_cary2020"
+                    },
+                    {
+                        "macro": "{$SQL_USER}",
+                        "value": "sa"
+                    }
+                ]
+            }
+        ],
+        "value_maps": [
+            {
+                "name": "SQLServer",
+                "mappings": [
+                    {
+                        "value": "0",
+                        "newvalue": "OK"
+                    },
+                    {
+                        "value": "1",
+                        "newvalue": "ERRO"
+                    }
+                ]
+            }
+        ]
+    }
+}
