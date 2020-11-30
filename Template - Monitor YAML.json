@@ -1,0 +1,49 @@
+{
+    "zabbix_export": {
+        "version": "5.2",
+        "date": "2020-11-30T20:54:52Z",
+        "groups": [
+            {
+                "name": "Templates/Templates Scripts"
+            }
+        ],
+        "templates": [
+            {
+                "template": "Template - Monitor YAML",
+                "name": "Template - Monitor YAML",
+                "groups": [
+                    {
+                        "name": "Templates/Templates Scripts"
+                    }
+                ],
+                "applications": [
+                    {
+                        "name": "YAML"
+                    }
+                ],
+                "items": [
+                    {
+                        "name": "Monitor YAML",
+                        "type": "TRAP",
+                        "key": "yaml",
+                        "delay": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "applications": [
+                            {
+                                "name": "YAML"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "expression": "{str(\"status: 'OK'\")}=0",
+                                "name": "Status YAML NOTOK",
+                                "priority": "HIGH"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
