@@ -21,3 +21,5 @@ docker run --name some-zabbix-proxy-sqlite3 \
 - Acesso a console do container e instalação do driver ODBC FreeTDS e editado o arquivo /etc/odbc.ini para configuração de comunicação com Banco de Dados.
 
 
+https://hub.docker.com/r/ugoclemes/zabbix-proxy-5.2.0
+
