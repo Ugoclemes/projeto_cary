@@ -1,12 +1,11 @@
 # Monitoramento de Banco de Dados SQLServer <h1>
 
 - Criação container SQLServer e inserção de dados manualmente:
-    docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=projeto_cary2020' -p 1433:1433 ugoclemes/mssql_dbjob:latest
+    - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=projeto_cary2020' -p 1433:1433 ugoclemes/mssql_dbjob:latest
 
 - Acesso ao container para validação dos Dados no Banco:
-    docker exec -it 9a43b69b48ae /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P projeto_cary2020
-
-https://hub.docker.com/r/ugoclemes/mssql_dbjob
+    - docker exec -it 9a43b69b48ae /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P projeto_cary2020
+        https://hub.docker.com/r/ugoclemes/mssql_dbjob
 
 - Criado Template para monitoramento do Banco de Dados SQLServer via ODBC para coleta de Status de um JOB.
 - Item para coleta do dado via ODBC.GET
