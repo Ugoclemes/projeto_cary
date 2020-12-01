@@ -4,7 +4,7 @@ Entenda "caixa preta" como qualquer componente proprietário de um projeto, ou s
 
 Gostaríamos de ouvir sobre:
 
-Passos a serem executados
-Interações com o cliente
-Entregáveis
-Prazo
+- Passos a serem executados
+- Interações com o cliente
+- Entregáveis
+- Prazo
