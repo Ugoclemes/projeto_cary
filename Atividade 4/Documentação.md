@@ -14,7 +14,6 @@
 - Controla as votações em aberto, opções de cada votação e resultado agregado (parcial ou definitivo)
     * Inserir os dados no Banco, onde será possivel a coleta através do Zabbix via ODBC, assim sendo possivel a criação de Dashboard, acionamentos por Telegram, Teams e/ou E-mail
 - Interface para visualizar votações e enviar votos
-    * Criação de Dasboard via Grafana e disponibilizar para acesso.
+    * Criação de Dasboard via Grafana de todos os recursos monitorado e disponibilizar para acesso.
 
 - Essa aplicação está em desenvolvimento e a equipe precisa de auxílio da equipe de monitoração para desenvolver as métricas que serão coletadas. O que você sugere para cada componente e para o serviço como um todo
-    
