@@ -1,7 +1,10 @@
 4) A equipe de desenvolvimento XPTO deseja monitorar aplicação web de votação, composta de:
 
-Frontend
-Interface para visualizar votações e enviar votos
+- Frontend
+    * Monitoramento via WebCenarário validando codigo da pagina, tempo de resposta, tempo de download e autenticação.
+
+- Interface para visualizar votações e enviar votos
+    * 
 Backend
 Recebe os votos e os insere no banco de dados
 Lista as votações e resultados
